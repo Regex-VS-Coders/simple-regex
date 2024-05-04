@@ -1,7 +1,7 @@
 {
   "name": "simple-regex",
   "displayName": "Simple Regex",
-  "description": "",
+  "description": "Highlights regex patterns in Python, Java, Golang and Rust files.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.89.0"
@@ -9,7 +9,12 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:java",
+    "onLanguage:python",
+    "onLanguage:golang",
+    "onLanguage:rust"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
