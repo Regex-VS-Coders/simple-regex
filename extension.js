@@ -10,7 +10,15 @@ const regexfunction = require('./processor/regexfunction');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	const javaRegexRegex = /(^|\s|[()={},:?;])"(\\(?:\\|"|[^\"])*)"(?=\s|[()={},:?;]|$)/g;
+	const pythonRegexRegex = /(^|\s|[()={},:?;])['"]((?:\\.|[^'\\])*?)['"](?=\s|[()={},:?;]|$)/g;
+	const golangRegexRegex = /(^|\s|[()={},:?;])(`(?:[^`])*`|"(?:\\.|[^"\\])*")(?=\s|[()={},:?;]|$)/g;
+	const rustRegexRegex = /(^|\s|[()={},:?;])"(\\.|[^"\\])*"(?=\s|[()={},:?;]|$)/g;
 
+	const regexHighlight = vscode.window.createTextEditorDecorationType({ backgroundColor: 'rgba(100,100,100,.35)' });
+    const matchHighlight = vscode.window.createTextEditorDecorationType({ backgroundColor: 'rgba(255,255,0,.35)' });
+
+	const languages = ['Java', 'Python', 'Golang', 'Rust'];
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "simple-regex" is now active!');

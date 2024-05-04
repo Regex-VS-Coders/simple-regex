@@ -31,10 +31,6 @@
     "@vscode/test-cli": "^0.0.8",
     "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.57.0",
-<<<<<<< HEAD
-    "mocha": "^10.4.0",
-=======
->>>>>>> 5f50ccff0b814ada97d31eb68f1c91f9c469b2e6
     "typescript": "^5.4.5"
   },
   "dependencies": {
