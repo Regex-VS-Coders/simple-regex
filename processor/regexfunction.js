@@ -1,12 +1,16 @@
+<<<<<<< HEAD:Processor/regexfunction.js
 
 const regexParser = require('regex-parser');
 
 console.log(regexParser);
 
+=======
+>>>>>>> 5f50ccff0b814ada97d31eb68f1c91f9c469b2e6:processor/regexfunction.js
 /**
 // write a function that takes two input fields namely the regex pattern and the test string to return a message
  that indicates if there is a match or not
 
+<<<<<<< HEAD:Processor/regexfunction.js
 @param {RegExp} regexPattern - The  RegExp object  to test.
 @param {string} testString - The test string to test against the regex pattern.
 @returns {string} A message indicating whether the test string matches the regex pattern.
@@ -49,4 +53,19 @@ function parseRegex(regexPattern) {
         throw new Error('Invalid regex pattern.');
 
     }
+=======
+@param {string} regexPattern - The regex pattern to test.
+@param {string} testString - The test string to match against the regex pattern.
+@returns {string} A message indicating whether the test string matches the regex pattern.
+*/
+
+const regexParser = require('regex-parser');
+
+function regexfunction(regexPattern, testString) {
+    return "";
+}
+
+module.exports = {
+    regexfunction
+>>>>>>> 5f50ccff0b814ada97d31eb68f1c91f9c469b2e6:processor/regexfunction.js
 }
