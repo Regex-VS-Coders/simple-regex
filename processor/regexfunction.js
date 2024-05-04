@@ -7,6 +7,8 @@
 @returns {string} A message indicating whether the test string matches the regex pattern.
 */
 
+const regexParser = require('regex-parser');
+
 function regexfunction(regexPattern, testString) {
     return "";
 }
