@@ -1,17 +1,23 @@
 /**
-// write a function that takes two input fields namely the regex pattern and the test string to return a message
- that indicates if there is a match or not
-@param {string} regexPattern - The regex pattern to test.
-@param {string} testString - The test string to match against the regex pattern.
-@returns {string} A message indicating whether the test string matches the regex pattern.
-*/
-
+ * Write a function that takes two input fields namely the regex pattern and the test string to return a message
+ * that indicates if there is a match or not.
+ * @param {string} regexPattern - The regex pattern to test.
+ * @param {string} testString - The test string to match against the regex pattern.
+ * @returns {boolean} True if a match is found, false if not.
+ */
 const regexParser = require('regex-parser');
 
 function regexfunction(regexPattern, testString) {
-    return "";
+    try {
+        const regex = regexParser(regexPattern); // parse the regex pattern
+        const matches = testString.match(regex); // finding matches
+        return matches !== null; // returns true if no matches are found
+    } catch (error) {
+        console.error("Invalid regex pattern:", error.message);
+        return false;
+    }
 }
 
 module.exports = {
     regexfunction
-}
+};
