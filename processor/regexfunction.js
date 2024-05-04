@@ -7,7 +7,10 @@
 @returns {string} A message indicating whether the test string matches the regex pattern.
 */
 
-function regexfunction(regexPattern, testString){
+function regexfunction(regexPattern, testString) {
+    return "";
+}
 
-    
+module.exports = {
+    regexfunction
 }
