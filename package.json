@@ -34,6 +34,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "regex-parser": "^2.3.0"
+    "regex-parser": "^2.3.0",
+    "regex-translator": "^0.2.8"
   }
 }

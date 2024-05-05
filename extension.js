@@ -1,7 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+
+
+
 const vscode = require('vscode');
 const regexfunction = require('./processor/regexfunction');
+
+
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -10,15 +15,18 @@ const regexfunction = require('./processor/regexfunction');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	const javaRegexRegex = /(^|\s|[()={},:?;])"(\\(?:\\|"|[^\"])*)"(?=\s|[()={},:?;]|$)/g;
-	const pythonRegexRegex = /(^|\s|[()={},:?;])['"]((?:\\.|[^'\\])*?)['"](?=\s|[()={},:?;]|$)/g;
-	const golangRegexRegex = /(^|\s|[()={},:?;])(`(?:[^`])*`|"(?:\\.|[^"\\])*")(?=\s|[()={},:?;]|$)/g;
-	const rustRegexRegex = /(^|\s|[()={},:?;])"(\\.|[^"\\])*"(?=\s|[()={},:?;]|$)/g;
+
+	
+	// need to define this and other regex of other languages elsewhere?
+	const defaultregex = /(^|\s|[()={},:?;])(\/((?:\\\/|\[[^\]]*\]|[^/])+)\/([gimuy]*))(\s|[()={},:?;]|$)/g;
+	// const pythonRegex = 
+	// const javascriptRegex = 
+	// const typescriptRegex = 
 
 	const regexHighlight = vscode.window.createTextEditorDecorationType({ backgroundColor: 'rgba(100,100,100,.35)' });
     const matchHighlight = vscode.window.createTextEditorDecorationType({ backgroundColor: 'rgba(255,255,0,.35)' });
 
-	const languages = ['Java', 'Python', 'Golang', 'Rust'];
+	const languages = ['JavaScript', 'Python', 'Golang', 'C'];
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "simple-regex" is now active!');
@@ -34,6 +42,24 @@ function activate(context) {
 	});
 
 	context.subscriptions.push(disposable);
+}
+
+
+
+
+function getRegex(languageId) {
+    switch (languageId) {
+        case 'golang':
+            return golangRegex;
+        case 'javascript':
+            return javascriptRegex;
+        case 'python':
+            return pythonRegex;
+		case 'typescript':
+			return typescriptRegex;
+        default:
+            return defaultregex; 
+    }
 }
 
 // This method is called when your extension is deactivated
