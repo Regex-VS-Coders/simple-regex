@@ -52,7 +52,7 @@ async function selectFlavor(input, state) {
     async function collectInputs() {
         // Initialize state
         const state = {};
-        await MultiStepInput.run(input => selectFlavor(input, state));
+        await multiStepInput.run(input => selectFlavor(input, state));
         return state;
     }
     const state = await collectInputs();
