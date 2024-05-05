@@ -8,9 +8,8 @@ const RegexTranslator = require('regex-translator');
 */
 
 function translateRegex(regexPattern, originalFlavor) {
-
-    return RegexTranslator.translate(regexPattern, originalFlavor, 'javascript');
-
+    const intermediaryString = RegexTranslator.getMediaryStringFromRegexString(regexPattern, originalFlavor);
+    return RegexTranslator.getRegexStringFromMediaryString(intermediaryString, 'ecma');
 }
 
 module.exports = {

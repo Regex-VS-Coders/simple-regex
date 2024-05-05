@@ -4,7 +4,7 @@
 
 
 const vscode = require('vscode');
-const regexfunction = require('./processor/regexfunction');
+const regexFunction = require('./processor/regexFunction');
 
 
 

@@ -7,7 +7,7 @@
 */
 const regexParser = require('regex-parser');
 
-function regexfunction(regexPattern, testString) {      
+function regexFunction(regexPattern, testString) {      
     try {
         const regex = regexParser(regexPattern) // parse the regex pattern
         const matches = testString.match(regex);  // finding matches
@@ -20,5 +20,5 @@ function regexfunction(regexPattern, testString) {
     }
 }
 module.exports = {
-    regexfunction
+    regexFunction
 };
