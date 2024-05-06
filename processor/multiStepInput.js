@@ -38,7 +38,7 @@ async function multiStepInput(context) {
         }, {
             language:'C',
             flavor: 'basic'
-        }];
+        }].map(label => ({ label }));
         const pick = await input.showQuickPick({
             title: 'Pick a Flavor',
             step: 1,
@@ -60,10 +60,10 @@ async function multiStepInput(context) {
     }
 
     const state = await collectInputs();
-    console.log(`You selected the flavor: ${state.flavor}`);
 
-    console.log(`Regex pattern: ${state.regexPattern}`);
-    console.log(`Test string: ${state.testString}`);
+    // console.log(`You selected the flavor: ${state.flavor}`);
+    // console.log(`Regex pattern: ${state.regexPattern}`);
+    // console.log(`Test string: ${state.testString}`);
 
     // Regex testing
     const regex = new RegExp(state.regexPattern);
@@ -96,6 +96,17 @@ async function multiStepInput(context) {
         state.testString = testString;
     }
 }
+
+// -------------------------------------------------------
+// Helper code that wraps the API for the multi-step case.
+// -------------------------------------------------------
+
+class InputFlowAction {
+	static back = new InputFlowAction();
+	static cancel = new InputFlowAction();
+	static resume = new InputFlowAction();
+}
+
 
 class MultiStepInput {
 
@@ -240,4 +251,8 @@ class MultiStepInput {
 			disposables.forEach(d => d.dispose());
 		}
 	}
+}
+
+module.exports = {
+	multiStepInput
 }

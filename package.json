@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "simple-regex.helloWorld",
-        "title": "Hello World"
+        "command": "simple-regex.regexInput",
+        "title": "Simple Regex Check"
       }
     ]
   },
