@@ -1,72 +1,64 @@
 const vscode = require('vscode');
 
+const regexTranslator = require('./regexTranslator');
+
 // Creates an instance of MyButton to be used as a custom quick input button
 // Allows users to add new flavors
 async function multiStepInput(context) {
 
-    // Defines the mybutton class 
-    class MyButton {
-        constructor(iconPath, tooltip) {
-            // Ensures the iconPath object contains 'light' and 'dark' properties
-            this.iconPath = {
-                light: vscode.Uri.file(iconPath.light),
-                dark: vscode.Uri.file(iconPath.dark)
-            };
-            this.tooltip = tooltip;
-        }
-    }
+	// class MyButton {
+	// 	constructor(iconPath, tooltip) {
+	// 		this.iconPath = iconPath;
+	// 		this.tooltip = tooltip;
+	// 	}
+	// }
+
+	class MyButton {
+		constructor(iconPath, tooltip) {
+			this.iconPath = iconPath;
+			this.tooltip = tooltip;
+		}
+	}
     
-    const addFlavorButton = new MyButton({
+    const createFlavorButton = new MyButton({
         dark: vscode.Uri.file(context.asAbsolutePath('resources/dark/add.svg')),
         light: vscode.Uri.file(context.asAbsolutePath('resources/light/add.svg')),
     }, 'Input Supported Programming Language');
 
-    async function selectFlavor(input, state) {
-        // Maps each string in the flavors array to a QuickPickItem object.
-        // so that each object shows a selectable item with its label set to the flavor name
-        const flavors = [{
-            language: 'JavaScript', 
-            flavor: 'ecma'
-        }, {
-            language: 'TypeScript', 
-            flavor: 'ecma'
-        }, {
-            language: 'Golang', 
-            flavor: 're2'
-        }, {
-            language:'C',
-            flavor: 'basic'
-        }].map(label => ({ label }));
-        const pick = await input.showQuickPick({
-            title: 'Pick a Flavor',
-            step: 1,
-            totalSteps: 3,
-            items: flavors,
-            placeholder: 'Pick your flavor',
-            buttons: [addFlavorButton]
-        });
-        state.flavor = pick.label;
-        return (input) => inputRegexPattern(input, state); // Proceed to regex pattern input
-    }
+	const flavors = ['JavaScript', 'TypeScript', 'Golang', 'C'].map(label => ({ label }));
 
-    // Defines a unction for collection of inputs   
+	const languageToFlavorMap = new Map();
+
+	languageToFlavorMap.set('JavaScript', 'ecma');
+	languageToFlavorMap.set('TypeScript', 'ecma');
+	languageToFlavorMap.set('Golang', 're2');
+	languageToFlavorMap.set('C', 'basic');
+	
+	// Defines a unction for collection of inputs   
     async function collectInputs() {
         // Initialize state
         const state = {};
-        await MultiStepInput.run(input => selectFlavor(input, state));
+        await MultiStepInput.run(input => pickRegexPattern(input, state));
         return state;
     }
 
+    async function pickRegexPattern(input, state) {
+        const pick = await input.showQuickPick({
+            title: 'Pick a Language',
+            step: 1,
+            totalSteps: 3,
+            items: flavors,
+            activeItem: typeof state.flavor !== 'string' ? state.flavor : undefined,
+			placeholder: 'Pick your language',
+            buttons: [createFlavorButton],
+			shouldResume: shouldResume
+        });
+		
+        state.flavor = pick;
+        return (input) => inputRegexPattern(input, state); // Proceed to regex pattern input
+    }
+
     const state = await collectInputs();
-
-    // console.log(`You selected the flavor: ${state.flavor}`);
-    // console.log(`Regex pattern: ${state.regexPattern}`);
-    // console.log(`Test string: ${state.testString}`);
-
-    // Regex testing
-    const regex = new RegExp(state.regexPattern);
-    const testResult = regex.test(state.testString);
-    vscode.window.showInformationMessage(`Test result: ${testResult}`);
 
     async function inputRegexPattern(input, state) {
         const regexPattern = await input.showInputBox({
@@ -75,8 +67,8 @@ async function multiStepInput(context) {
             totalSteps: 3,
             value: '',
             prompt: 'Enter your regex pattern',
-            validate: (text) => text.length > 0 
-            
+            validate: validateString,
+            shouldResume: shouldResume
         });
         state.regexPattern = regexPattern;
         return (input) => inputTestString(input, state); // can now Proceed to test string input
@@ -89,10 +81,32 @@ async function multiStepInput(context) {
             totalSteps: 3,
             value: '',
             prompt: 'Enter a string to test against the regex',
-            validate: (text) => text.length > 0
+            validate: validateString,
+			shouldResume: shouldResume
         });
         state.testString = testString;
     }
+
+	function shouldResume() {
+		// Could show a notification with the option to resume.
+		return new Promise((resolve, reject) => {});
+	}
+
+	async function validateString(input) {
+		// ...validate...
+		await new Promise(resolve => setTimeout(resolve, 1000));
+		return input.trim().length == 0 ? 'String is blank/empty' : undefined;
+	}
+
+	// Regex testing
+	const sourceRegex = regexTranslator.translateRegex(
+		state.regexPattern, 
+		languageToFlavorMap.get(state.flavor.label)
+	);
+    const regex = new RegExp(sourceRegex);
+    const testResult = regex.test(state.testString);
+
+	vscode.window.showInformationMessage(`Test result: ${testResult}`);
 }
 
 // -------------------------------------------------------
@@ -105,17 +119,16 @@ class InputFlowAction {
 	static resume() {new InputFlowAction()};
 }
 
-
 class MultiStepInput {
-	#current;
-	#steps = [];
+	current;
+	steps = [];
 
 	static async run(start) {
 		const input = new MultiStepInput();
 		return input.stepThrough(start);
 	}
 
-	async #stepThrough(start) {
+	async stepThrough(start) {
 		let step = start;
 		while (step) {
 			this.steps.push(step);

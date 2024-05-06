@@ -30,20 +30,20 @@ function activate(context) {
 	// context.subscriptions.push(disposable);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('simple-regex.regexInput', () => {
-		const options = {
-			multiStepInput
-		};
-		const quickPick = vscode.window.createQuickPick();
-		quickPick.items = Object.keys(options).map(label => ({ label }));
-		quickPick.onDidChangeSelection(selection => {
-			if (selection[0]) {
-				options[selection[0].label](context)
-					.catch(console.error);
-			}
-		});
-		quickPick.onDidHide(() => quickPick.dispose());
-		quickPick.show();
+		vscode.commands.registerCommand('simple-regex.quickInput', () => {
+		// const options = {
+		// 	multiStepInput
+		// };
+		// const quickPick = vscode.window.createQuickPick();
+		// quickPick.items = Object.keys(options).map(label => ({ label }));
+		// quickPick.onDidChangeSelection(selection => {
+		// 	multiStepInput.multiStepInput(context)
+		// 		.catch(console.error);
+		// });
+		// quickPick.onDidHide(() => quickPick.dispose());
+		// quickPick.show();
+		multiStepInput.multiStepInput(context)
+			.catch(console.error);
 	}));
 }
 

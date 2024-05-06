@@ -14,7 +14,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "simple-regex.regexInput",
+        "command": "simple-regex.quickInput",
         "title": "Simple Regex Check"
       }
     ]
