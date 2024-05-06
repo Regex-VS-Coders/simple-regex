@@ -191,7 +191,7 @@ class MultiStepInput {
 		}
 	}
 
-	async showInputBox({ title, step, totalSteps, value, prompt, validate, buttons, ignoreFocusOut, placeholder, shouldResume }: P) {
+	async showInputBox({ title, step, totalSteps, value, prompt, validate, buttons, ignoreFocusOut, placeholder, shouldResume }) {
 		const disposables = [];
 		try {
 			return await new Promise((resolve, reject) => {
