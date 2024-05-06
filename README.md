@@ -2,64 +2,47 @@
 
 This is the README for your extension "simple-regex". After writing up a brief description, we recommend including the following sections.
 
+## Team members
+
+1. Kris Stern
+1. Shlomo Dahan
+1. Danial Zakaria
+1. Rosemol Johnson K
+
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+We take a three step approach to obtain input from the user in order to check whether the test string matches the regex pattern provided for a particular flavor. In the end we have a simple UI which can be activated in the simulator by pressing shift + cmd + P for Mac and shift + ctrl + P for Windows/Linux.
 
-For example if there is an image subfolder under your extension project workspace:
+> Caveat: Due to the length of the hackathon, we didn't have time to test the extension thoroughly. Please use it at your own discretion and with caution.
 
-\!\[feature X\]\(images/feature-x.png\)
+## Inspiration
+- There are extensions in VS Code IDE that assists developers in working with regular expressions directly within VS Code. While these extensions offer several features that are beneficial, we see a need for an extension that addresses user interface constraints.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## What it does
+- The extension checks for codes that obeys the input regex pattern based on flavors that was chosen (e.g. JavaScript, Typescript, Golang, and C).
 
-## Requirements
+## How we built it
+- This application was built using JavaScript, Node.js and also used the VS Code Extension API, as well as various regex flavors.
+- We worked asynchronously, sometimes independently and sometimes as a group/pair. 
+- We developed the codebase for the VS Code extension using VS Code as the IDE. 
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Challenges we ran into
+- For two of the team members, our major challenge was learning JavaScript so that we could contribute.
+- Working as a distributed team with teammates from different time zones is challenging but rewarding. At times we struggled to find mutually agreeable time to meet. But we made it work for us in order to complete the project on time. It did feel like a marathon instead of a sprint though. 
 
-## Extension Settings
+## Accomplishments that we're proud of
+- First experience in a hackathon for two of the members.
+- Building the first extension. 
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## What we learned
+- Learnt the fundamentals of Git/GitHub.
+- Developed an understanding of utilizing VS Code API, leveraging regex translator and the RegExp built in object in JavaScript.
+- Learnt about Node.js and JavaScript. 
 
-For example:
+## What's next for Regex VS Coders
+- Maybe we will team up again for future side projects or hackathons.
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Built With
+- JavaScript, Node.js, npm, GitHub, VS Code Extension AP.
 
 **Enjoy!**
