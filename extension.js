@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 
 const vscode = require('vscode');
-const regexFunction = require('./processor/regexFunction');
+// const regexFunction = require('./processor/regexFunction');
 const multiStepInput = require('./processor/multiStepInput');
 
 // This method is called when your extension is activated
@@ -29,11 +29,12 @@ function activate(context) {
 
 	// context.subscriptions.push(disposable);
 
-	context.subscriptions.push(vscode.commands.registerCommand('simple-regex.regexInput', async () => {
+	context.subscriptions.push(
+		vscode.commands.registerCommand('simple-regex.regexInput', () => {
 		const options = {
 			multiStepInput
 		};
-		const quickPick = window.createQuickPick();
+		const quickPick = vscode.window.createQuickPick();
 		quickPick.items = Object.keys(options).map(label => ({ label }));
 		quickPick.onDidChangeSelection(selection => {
 			if (selection[0]) {

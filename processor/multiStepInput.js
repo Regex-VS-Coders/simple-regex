@@ -1,7 +1,5 @@
 const vscode = require('vscode');
 
-import { QuickPickItem, window, Disposable, CancellationToken, QuickInputButton, QuickInput, ExtensionContext, QuickInputButtons, Uri } from 'vscode';
-
 // Creates an instance of MyButton to be used as a custom quick input button
 // Allows users to add new flavors
 async function multiStepInput(context) {
@@ -102,23 +100,22 @@ async function multiStepInput(context) {
 // -------------------------------------------------------
 
 class InputFlowAction {
-	static back = new InputFlowAction();
-	static cancel = new InputFlowAction();
-	static resume = new InputFlowAction();
+	static back() {new InputFlowAction()};
+	static cancel() {new InputFlowAction()};
+	static resume() {new InputFlowAction()};
 }
 
 
 class MultiStepInput {
+	#current;
+	#steps = [];
 
 	static async run(start) {
 		const input = new MultiStepInput();
 		return input.stepThrough(start);
 	}
 
-	current;
-	steps = [];
-
-	async stepThrough(start) {
+	async #stepThrough(start) {
 		let step = start;
 		while (step) {
 			this.steps.push(step);
@@ -150,7 +147,7 @@ class MultiStepInput {
 		const disposables = [];
 		try {
 			return await new Promise((resolve, reject) => {
-				const input = window.createQuickPick();
+				const input = vscode.window.createQuickPick();
 				input.title = title;
 				input.step = step;
 				input.totalSteps = totalSteps;
@@ -161,12 +158,12 @@ class MultiStepInput {
 					input.activeItems = [activeItem];
 				}
 				input.buttons = [
-					...(this.steps.length > 1 ? [QuickInputButtons.Back] : []),
+					...(this.steps.length > 1 ? [vscode.QuickInputButtons.Back] : []),
 					...(buttons || [])
 				];
 				disposables.push(
 					input.onDidTriggerButton(item => {
-						if (item === QuickInputButtons.Back) {
+						if (item === vscode.QuickInputButtons.Back) {
 							reject(InputFlowAction.back);
 						} else {
 							resolve(item);
@@ -195,7 +192,7 @@ class MultiStepInput {
 		const disposables = [];
 		try {
 			return await new Promise((resolve, reject) => {
-				const input = window.createInputBox();
+				const input = vscode.window.createInputBox();
 				input.title = title;
 				input.step = step;
 				input.totalSteps = totalSteps;
@@ -204,13 +201,13 @@ class MultiStepInput {
 				input.ignoreFocusOut = ignoreFocusOut ?? false;
 				input.placeholder = placeholder;
 				input.buttons = [
-					...(this.steps.length > 1 ? [QuickInputButtons.Back] : []),
+					...(this.steps.length > 1 ? [vscode.QuickInputButtons.Back] : []),
 					...(buttons || [])
 				];
 				let validating = validate('');
 				disposables.push(
 					input.onDidTriggerButton(item => {
-						if (item === QuickInputButtons.Back) {
+						if (item === vscode.QuickInputButtons.Back) {
 							reject(InputFlowAction.back);
 						} else {
 							resolve(item);
