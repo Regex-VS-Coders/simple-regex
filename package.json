@@ -19,8 +19,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "simple-regex.helloWorld",
-        "title": "Hello World"
+        "command": "simple-regex.quickInput",
+        "title": "Simple Regex Check"
       }
     ]
   },
@@ -39,6 +39,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "regex-parser": "^2.3.0"
+    "regex-parser": "^2.3.0",
+    "regex-translator": "^0.2.8"
   }
 }
