@@ -1,7 +1,7 @@
 {
   "name": "simple-regex",
   "displayName": "Simple Regex",
-  "description": "Highlights regex patterns in Python, Java, Golang and Rust files.",
+  "description": "Validate tokens against regex patterns in JavaScript, TypeScript, Golang and C files",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.89.0"
