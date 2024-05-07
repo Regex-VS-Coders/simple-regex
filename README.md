@@ -3,17 +3,17 @@
 This is the README for your extension "simple-regex". After writing up a brief description, we recommend including the following sections.
 
 ## Team members
-
 1. Kris Stern
-1. Shlomo Dahan
 1. Danial Zakaria
 1. Rosemol Johnson K
 
 ## Features
-
 We take a three step approach to obtain input from the user in order to check whether the test string matches the regex pattern provided for a particular flavor. In the end we have a simple UI which can be activated in the simulator by pressing shift + cmd + P for Mac and shift + ctrl + P for Windows/Linux.
 
 > Caveat: Due to the length of the hackathon, we didn't have time to test the extension thoroughly. Please use it at your own discretion and with caution.
+
+## Instructions to test the VS Code extension
+Download the codebaee and open it with the VS Code IDE. Choose "Run and Debug" and run the "Run Extension" play button on top. A simulator would be opened up. Then activate the extension by pressing shift + cmd + P for Mac and shift + ctrl + P for Windows/Linux then choosing the "Simple Regex Check" command, which should be available in this setup. Then follow the prompts to test. A response will be shown in the lower right corner of the IDE once the flow has been completed. 
 
 ## Inspiration
 - There are extensions in VS Code IDE that assists developers in working with regular expressions directly within VS Code. While these extensions offer several features that are beneficial, we see a need for an extension that addresses user interface constraints.
